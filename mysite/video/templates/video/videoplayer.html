@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Video Player{% endblock %}
+
+{% block styles %}
+<style>
+    /* 页面特定样式 */
+    .video-container {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    #playlist {
+    list-style-type: none; /* 移除默认的列表项目符号 */
+    padding: 0;
+    /*max-width: 600px;  或根据您的页面布局调整最大宽度 */
+    margin: 20px auto; /* 居中显示播放列表 */
+    background-color: #f8f8f8; /* 轻微背景色增加对比 */
+    border-radius: 8px; /* 轻微圆角 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 添加一些阴影以提升层次感 */
+    padding: 20px; /* 内边距 */
+    }
+
+    #playlist h3 {
+        margin-top: 0; /* 第一个项目与列表顶部的距离 */
+        font-size: 1.2rem; /* 调整标题字体大小 */
+        color: #333; /* 标题颜色 */
+        padding-bottom: 10px; /* 标题下方的空间 */
+        border-bottom: 1px solid #ddd; /* 标题下的分隔线 */
+    }
+
+    #playlist div + div {
+        margin-top: 15px; /* 调整列表项之间的间距 */
+    }
+
+    #playlist div h3 a {
+        font-size: 0.9rem; /* 调整链接字体大小 */
+        color: #0056b3; /* 链接颜色 */
+        text-decoration: none; /* 移除下划线 */
+        transition: color 0.3s; /* 鼠标悬停时的颜色过渡效果 */
+    }
+
+    #playlist div h3 a:hover {
+        color: #00376b; /* 鼠标悬停时链接的颜色 */
+        text-decoration: underline; /* 添加下划线以提升可点击的视觉反馈 */
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="video-container">
+    <video id="videoPlayer" controls width="100%">
+        <source src="https://via.placeholder.com/150" type="video/mp4" />
+        Your browser does not support the video tag.
+    </video>
+</div>
+<form method="post" enctype="multipart/form-data" style="margin-bottom: 20px">
+    {% csrf_token %}
+    <input type="file" id="videoUpload" name="video_file" required>
+    <input type="text" name="title" placeholder="Title" required>
+    <button type="submit">Upload Video</button>
+</form>
+<div id="playlist">
+    <h3>Your Playlist</h3>
+    {% for video in videos %}
+    <div>
+        <h3><a href="javascript:void(0);" onclick="playVideo('{{ video.video_file.url }}')">{{ video.title }}</a></h3>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    function playVideo(url) {
+        var player = document.getElementById("videoPlayer");
+        // 移除现有的<source>标签
+        player.innerHTML = '';
+        // 创建新的<source>标签
+        var source = document.createElement('source');
+        source.setAttribute('src', url);
+        source.setAttribute('type', 'video/mp4');
+        player.appendChild(source);
+        player.load(); // 重新加载视频
+        player.play(); // 播放视频
+    }
+</script>
+{% endblock %}

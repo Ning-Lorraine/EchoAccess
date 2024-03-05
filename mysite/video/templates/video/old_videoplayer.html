@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}Video Player{% endblock %}
+
+{% block styles %}
+<style>
+    /* Page-specific styles */
+    .video-container {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    #playlist {
+        list-style: none;
+        padding: 0;
+    }
+    #playlist li a {
+        color: var(--link);
+        text-decoration: none;
+    }
+    #playlist li a:hover {
+        text-decoration: underline;
+    }
+    /* list部分 */
+    #playlist div {
+        margin-bottom: 15px;
+        padding: 10px;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: background-color 0.3s ease;
+    }
+    #playlist h3 {
+        margin: 0;
+        font-size: 18px;
+    }
+    #playlist h3 a {
+        color: var(--primary);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    #playlist h3 a:hover {
+        color: var(--secondary);
+        text-decoration: underline;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="grid">
+    <section>
+        <div class="video-container">
+            <video id="videoPlayer" controls width="100%">
+                <source src="https://via.placeholder.com/150" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <form method="post" enctype="multipart/form-data" style="margin-bottom: 20px">
+            {% csrf_token %}
+            <!-- {{ form.as_p }} -->
+            <!-- <input type="file" id="videoUpload" name="video" required>
+            <input type="file" id="videoUpload" name="video" required> -->
+            <label for="id_video_file">Video file:</label>
+            <input type="file" name="video_file" id="id_video_file" required>
+            <label for="id_title">Title:</label>
+            <input type="text" name="title" id="id_title" required>
+            <button type="submit">Upload Video</button>
+        </form>
+        <div id="playlist">
+            <h3>Your Playlist</h3>
+            {% for video in videos %}
+            <div>
+                <h3><a href="javascript:void(0);" onclick="playVideo('{{ video.video_file.url }}')">{{ video.title }}</a></h3>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+
+{% block extra_scripts %}
+<script>
+    function playVideo(url) {
+        var player = document.getElementById("videoPlayer");
+        // 移除现有的<source>标签
+        player.innerHTML = '';
+        // 创建新的<source>标签
+        var source = document.createElement('source');
+        source.setAttribute('src', url);
+        source.setAttribute('type', 'video/mp4');
+        player.appendChild(source);
+        player.load(); // 重新加载视频
+        player.play(); // 播放视频
+    }
+</script>
+{% endblock %}
+
+
+    .container {
+        display: flex;
+        justify-content: start;
+        align-items: flex-start;
+        max-width: 1200px; /* 或根据您的设计需求调整 */
+        margin: 0 auto; /* 添加此行来水平居中容器 */
+        width: 100%; /* 确保容器宽度可以根据max-width适应 */
+    }
+
+    .video-container {
+        flex: 1;
+        max-width: 70%;
+        margin-left: 30px;
+    }
+
+    .form-and-playlist-container {
+        flex: 1;
+        max-width: 30%;
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - 40px); /* Adjust based on your header/footer height */
+        font-size: 0.8rem; /* Smaller font size */
+        margin-left: 20px;
+    }
+
+    .form-container {
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .form-container input,
+    .form-container button {
+        margin-bottom: 10px; /* Smaller spacing */
+    }
+
+    #playlist {
+        list-style: none;
+        padding: 0;
+        overflow-y: auto; /* Enable scrolling */
+        flex-grow: 1; /* Take available space */
+    }
+
+    #playlist div {
+        margin-bottom: 10px; /* 减小列表项之间的间距 */
+        padding: 5px; /* 减小内边距使得每一项更小 */
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    #playlist h3 a {
+        font-size: 0.8rem; /* 缩小字体大小 */
+        color: var(--link);
+        text-decoration: none;
+    }
+
+    #playlist h3 a:hover {
+        text-decoration: underline;
+    }

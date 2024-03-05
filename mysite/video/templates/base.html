@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <title>{% block title %}{% endblock %}</title>
+        <!-- <style>
+        /* Global styles can go here */
+        /* .container {
+            padding: 20px;
+        } */
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+        }
+        nav li {
+            margin-right: 20px;
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style> -->
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <nav class="container-fluid">
+        <ul>
+            <li><strong>Video Player</strong></li>
+        </ul>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Upload</a></li>
+            <li><a href="#" role="button">Playlist</a></li>
+        </ul>
+    </nav>
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="container">
+        <small><a href="#">Terms of Use</a> • <a href="#">Privacy Policy</a></small>
+    </footer>
+
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

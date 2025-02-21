@@ -1,6 +1,10 @@
 # EchoAccess
 A video player
 
+# 功能流程图
+
+![流程图](1.png "流程示意图")
+
 # Speaker diarization
 
 ## Introduction

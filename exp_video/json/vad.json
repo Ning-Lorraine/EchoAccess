@@ -1,0 +1,38 @@
+{
+  "test2_0.14_1.46": {
+    "file": "exp_video/raw/test2.wav",
+    "start": 0.14,
+    "stop": 1.46,
+    "sample_rate": 16000
+  },
+  "test2_2.65_5.19": {
+    "file": "exp_video/raw/test2.wav",
+    "start": 2.65,
+    "stop": 5.19,
+    "sample_rate": 16000
+  },
+  "test2_6.35_7.54": {
+    "file": "exp_video/raw/test2.wav",
+    "start": 6.35,
+    "stop": 7.54,
+    "sample_rate": 16000
+  },
+  "test2_9.19_22.85": {
+    "file": "exp_video/raw/test2.wav",
+    "start": 9.19,
+    "stop": 22.85,
+    "sample_rate": 16000
+  },
+  "test2_24.13_35.78": {
+    "file": "exp_video/raw/test2.wav",
+    "start": 24.13,
+    "stop": 35.78,
+    "sample_rate": 16000
+  },
+  "test2_36.06_52.41": {
+    "file": "exp_video/raw/test2.wav",
+    "start": 36.06,
+    "stop": 52.41,
+    "sample_rate": 16000
+  }
+}

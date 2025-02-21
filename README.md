@@ -3,7 +3,7 @@ A video player
 
 # 功能流程图
 
-![流程图](.\img\1.png "流程示意图")
+![流程图](./img/1.png)
 
 # Speaker diarization
 
